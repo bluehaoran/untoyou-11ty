@@ -1,11 +1,16 @@
-module.exports = function(eleventyConfig) {
-  eleventyConfig.setUseGitIgnore(false);
-  eleventyConfig.addWatchTarget('./src/css/tailwind.css');
-  eleventyConfig.addPassthroughCopy('./src/img');
-  return {
-    dir: {
-      input: 'src',
-      output: 'public'
-    }
-  }
+const { execSync } = require('child_process')
+
+module.exports = function (eleventyConfig) {
+	eleventyConfig.addPassthroughCopy('./src/img')
+	eleventyConfig.setServerOptions({
+		watch: ['./public/css/styles.css'],
+	})
+
+	return {
+		htmlTemplateEngine: 'njk',
+		dir: {
+			input: 'src',
+			output: 'public',
+		},
+	}
 }
